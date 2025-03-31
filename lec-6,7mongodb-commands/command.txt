@@ -1,0 +1,51 @@
+ show dbs
+admin    40.00 KiB
+config   36.00 KiB
+g13db   112.00 KiB
+g15db    72.00 KiB
+g16     112.00 KiB
+g27db    72.00 KiB
+local    40.00 KiB
+mydb     84.00 KiB
+test> use g14db
+switched to db g14db
+g14db> show collections
+
+g14db> db.users.insertOne({name:"Nitesh"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('67d8019aba50bd27834d7942')
+}
+g14db> db.blogs.insertOne({title:"my first blog",content:"content of my first blog"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('67d8031bba50bd27834d7943')
+}
+g14db> show collections
+blogs
+users
+g14db> db.users.insertMany([{name:"sid",age:20},{name:"sahil",age:"20",address:"punjab"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('67d8041fba50bd27834d7944'),
+    '1': ObjectId('67d8041fba50bd27834d7945')
+  }
+}
+g14db> db.users.insertOne({})
+{
+  acknowledged: true,
+  insertedId: ObjectId('67d8050fba50bd27834d7946')
+}
+g14db> db.users.find()
+[
+  { _id: ObjectId('67d8019aba50bd27834d7942'), name: 'Nitesh' },
+  { _id: ObjectId('67d8041fba50bd27834d7944'), name: 'sid', age: 20 },
+  {
+    _id: ObjectId('67d8041fba50bd27834d7945'),
+    name: 'sahil',
+    age: '20',
+    address: 'punjab'
+g14db> db.users.find({age:{$gt:18}})
+[ { _id: ObjectId('67d8041fba50bd27834d7944'), name: 'sid', age: 20 } ]
+g14db>
